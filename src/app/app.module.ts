@@ -1,18 +1,20 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
-
-import { GastosListComponent } from './gastos-list/gastos-list.component';
-import { AppComponent } from './app.component';
+import { provideHttpClient } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { NgIf } from '@angular/common';
+import { AppRoutingModule } from './app.routes';
 
 
 @NgModule({
   declarations: [
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,FormsModule, NgIf,
+    /* RouterOutlet, */
+    AppRoutingModule,
   ],
-  providers: [],
+  providers: [provideHttpClient()],
   bootstrap: []
 })
 export class AppModule { }

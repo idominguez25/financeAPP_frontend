@@ -1,6 +1,23 @@
-<ul>
-    <li *ngFor="let gasto of gastos">
-      {{ gasto.descripcion}} <!-- Asegúrate de que 'name' sea una propiedad válida de los objetos en el array -->
-    </li>
-  </ul>
-  
+  <div class="input-group mb-3">
+    <input type="text" class="form-control" placeholder="Ingresos" id="ingresos" [(ngModel)]="sueldo" aria-describedby="button-addon2">
+    <button class="btn btn-outline-secondary" type="button" id="button-addon2" (click)="calcularResultados()">Calcular</button>
+    <div *ngIf="mostrarResultados">
+      <p>Total de gastos: {{sumaGastos}}€<br>
+      Dinero restante: {{dineroRestante}}€<br>
+      Margen: {{dineroCaprichos}}€<br>
+      Ahorro: {{ahorro}}€
+      </p>
+    </div>
+  </div>
+
+  <div>
+    <button (click)="mostrarGastos()">Mostrar gastos</button>
+    <ul *ngIf="mostrarLista">
+      <li *ngFor="let gasto of gastos">
+        {{gasto.descripcion}} : {{gasto.cantidad}}
+      </li>
+    </ul>
+  </div>
+  <div>
+    <button (click)="anadirGasto()">Añadir gasto</button>
+  </div>
