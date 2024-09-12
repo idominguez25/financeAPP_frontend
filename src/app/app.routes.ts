@@ -4,7 +4,7 @@ import { SueldoComponent } from './sueldo/sueldo.component';
 import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
-    { path: 'gastos', component: GastosListComponent },
+    { path: 'gastos-list', component: GastosListComponent },
     { path: 'inicio', component: SueldoComponent },
     { path: '', redirectTo: 'inicio', pathMatch: 'full' },
 ];

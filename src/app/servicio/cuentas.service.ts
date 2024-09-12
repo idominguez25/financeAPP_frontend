@@ -24,4 +24,9 @@ export class CuentasService {
   findByName(descripcion: string): Observable<Gasto>{
     return this.httpClient.get<Gasto>(`${this.backendURL}/buscar`)
   }
+
+  //Método para añadir un nuevo gasto
+  añadirGasto(nuevoGasto: Gasto): Observable<any> {
+    return this.httpClient.post(`${this.backendURL}/añadir`, nuevoGasto)
+  }
 }

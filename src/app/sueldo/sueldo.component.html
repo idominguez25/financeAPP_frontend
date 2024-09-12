@@ -1,1 +1,25 @@
-<p>sueldo works!</p>
+<html>
+<div>
+  <div>
+    <div class="input-sueldo center" name="ingresoSueldo">
+      <mat-form-field class="input-full-width" id="formIngreso">
+        <mat-label>Sueldo</mat-label>
+        <input id="ingresos" [(ngModel)]="sueldo" aria-describedby="botonCalcular">
+      </mat-form-field>
+      <div id="divButton">
+        <button name="btningresos" mat-button id="botonCalcular" (click)="calcularResultados()">Calcular</button>
+     </div>
+    </div>
+    <div class="center">
+      <div *ngIf="mostrarResultados">
+        <p>Total de gastos: {{sumaGastos}}€<br>
+          Dinero restante: {{dineroRestante}}€<br>
+          Margen: {{dineroCaprichos}}€<br>
+          Ahorro: {{ahorro}}€
+        </p>
+      </div>
+    </div>
+  </div>
+</div>
+
+</html>

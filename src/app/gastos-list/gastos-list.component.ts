@@ -1,68 +1,48 @@
-import { Component, OnInit} from '@angular/core';
-import { Gasto } from '../modelo/gasto';
-import { CuentasService } from '../servicio/cuentas.service';
+import { Component, Input, OnInit} from '@angular/core';
 import {NgFor, NgIf} from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { AppComponent } from "../app.component";
+import {MatTableModule} from '@angular/material/table';
+import { Gasto } from '../modelo/gasto';
+import { CuentasService } from '../servicio/cuentas.service';
+import { MatButton } from '@angular/material/button';
+import {MatIcon} from '@angular/material/icon';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogComponent } from '../dialog/dialog.component';
+
 
 
 @Component({
   selector: 'app-gastos-list',
   standalone: true,
-  imports: [NgFor, FormsModule, NgIf, AppComponent],
+  imports: [NgFor, FormsModule, NgIf, AppComponent, MatTableModule, MatButton, MatIcon],
   templateUrl: './gastos-list.component.html',
   styleUrl: './gastos-list.component.css'
 })
 //usa el servicio para obtener y mostrar las tareas
 export class GastosListComponent implements OnInit{
-  gastos: Gasto[] = [];
-  sueldo!: number;
-  dineroRestante: number = 0;
-  sumaGastos: number = 0;
-  dineroCaprichos: number = 0;
-  ahorro: number = 0;
-  mostrarLista: boolean = false;
-  mostrarResultados: boolean = false;
+  //Variables
+  gastos: Gasto[] = []
+  displayedColumns: string[] = ['nombre', 'cantidad', 'acciones'];
+  dataSource = this.gastos;
 
-  constructor(private cuentasService: CuentasService) {}
-
+  constructor(private cuentasService: CuentasService, private dialog: MatDialog) {}
+  
   ngOnInit(): void {
     this.cuentasService.listaGastos().subscribe(
       data => {
-       this.gastos = data
+       this.gastos = data;
+       this.dataSource = this.gastos;
+      },
+      error => {
+        console.error('Error al cargar los gastos', error);
       });;
-  }
-  //Método para mostrar los resultados
-  calcularResultados(): void {
-    this.mostrarResultados = true;
-
-    //Calcula la suma de todos los gastos
-    this.calcularSumaGastos();
-
-    //Calcula el dinero restante
-    this.dineroRestante = this.sueldo - this.sumaGastos;
-
-    //Calcula el dinero para caprichos
-    this.dineroCaprichos = (this.dineroRestante * 30) / 100;
-
-    //Calcula el total de ahorro
-    this.ahorro = this.dineroRestante - this.dineroCaprichos;
+      
   }
 
-  //Método para mostrar los gastos
-  mostrarGastos(): Gasto[] {
-    this.mostrarLista = true;
-    return this.gastos;
+  abrirDialog(): void{
+      const dialogRef = this.dialog.open(DialogComponent);
   }
-
-  //Método para sumar el total de gastos
-  calcularSumaGastos(): void {
-    this.sumaGastos = this.gastos.reduce((acc, gasto) => acc + gasto.cantidad, 0);
-  }
-
-  //Método para añadir un nuevo gasto
-  anadirGasto(): void {
-
-  }
+  
 }
 
