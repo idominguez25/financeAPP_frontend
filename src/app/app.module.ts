@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideHttpClient } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule, NgIf } from '@angular/common';
 import { AppRoutingModule } from './app.routes';
 import { RouterModule } from '@angular/router';
@@ -20,7 +20,7 @@ import { MatDialogModule } from '@angular/material/dialog';
     AppRoutingModule,
     CommonModule, RouterModule, MatButtonModule, 
     MatFormFieldModule, MatInputModule,
-    MatButtonModule, MatDialogModule
+    MatButtonModule, MatDialogModule, ReactiveFormsModule
   ],
   providers: [provideHttpClient()],
   bootstrap: []

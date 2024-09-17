@@ -1,13 +1,14 @@
 import { HttpClient } from '@angular/common/http';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import {
   MatDialogModule, MatDialogRef,
   MatDialogTitle,
   MatDialogContent,
 } from '@angular/material/dialog';
-import {MatButtonModule} from '@angular/material/button';
+import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-dialog',
@@ -17,14 +18,23 @@ import { MatInputModule } from '@angular/material/input';
   styleUrl: './dialog.component.css'
 })
 export class DialogComponent {
-  postData = { descripcion: '', cantidad: '' };  // Datos que se enviarán en el POST
+  form!: FormGroup;
 
   constructor(
     public dialogRef: MatDialogRef<DialogComponent>,
-  ) {}
+    public fb: FormBuilder
+  ) { }
 
   //Método para añadir un nuevo gasto
   añadirGasto() {
     const url = 'http://localhost:4200'
+  }
+
+  save() {
+    this.dialogRef.close(this.form.value);
+  }
+
+  close() {
+    this.dialogRef.close();
   }
 }

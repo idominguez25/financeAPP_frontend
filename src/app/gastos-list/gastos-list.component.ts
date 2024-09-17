@@ -42,6 +42,10 @@ export class GastosListComponent implements OnInit{
 
   abrirDialog(): void{
       const dialogRef = this.dialog.open(DialogComponent);
+
+      dialogRef.afterClosed().subscribe(
+        data => console.log("Dialog output:", data)
+    );  
   }
   
 }
