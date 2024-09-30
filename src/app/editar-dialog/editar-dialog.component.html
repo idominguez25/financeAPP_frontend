@@ -1,0 +1,18 @@
+<form class="paddingForm">
+    <h3>Editar gasto</h3>
+    <mat-form-field>
+      <mat-label>Descripción</mat-label>
+      <input matInput [(ngModel)]="descripcion" name="descripcion" value="descripcion" required="true" />
+    </mat-form-field>
+  
+    <mat-form-field>
+      <mat-label>Cantidad</mat-label>
+      <input matInput [(ngModel)]="cantidad" name="cantidad" value="cantidad" required="true">
+    </mat-form-field>
+  
+    <div mat-dialog-actions>
+      <button mat-button color="primary" (click)="save()">Guardar</button>
+      <button mat-button (click)="close()">Cancelar</button>
+    </div>
+  </form>
+  

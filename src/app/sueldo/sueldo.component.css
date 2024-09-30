@@ -1,55 +1,51 @@
+/* General container */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Alineación en la parte superior */
+  padding-top: 20px; /* Espacio superior */
+  width: 100%;
+  height: 100vh;
+  box-sizing: border-box;
+}
 
-.input-sueldo {
-    /*min-width: 100px;
-    max-width: 400px;*/
-    width: 100%;
-    display: flex;
-  }
-  
-  .input-full-width {
-    width: 100%;
-  }
-  .center {
-    margin: auto;
-    width: 60%;
-    padding: 10px;
-    align-items: center;
-  }
+/* Container for the input and button */
+.input-container {
+  display: flex; /* Flexbox para alinear en fila */
+  align-items: center; /* Centra verticalmente el input y botón */
+  justify-content: center; /* Centra el contenedor completo */
+  width: 100%;
+  max-width: 600px; /* Controla el ancho máximo */
+  padding: 10px;
+  box-sizing: border-box;
+}
 
-  #divButton{
-    display: inline-block;
-  }
+/* Estilos para el campo de entrada */
+mat-form-field {
+  flex-grow: 1; /* Toma todo el ancho disponible */
+  margin-right: 10px; /* Espaciado entre input y botón */
+  margin-top: 20px;
+}
 
-  #formIngreso{
-    display: inline-block;
-    
-  }
+#ingresos {
+  width: 100%;
+}
 
-  .mat-mdc-form-field-subscript-wrapper, .mat-mdc-form-field-bottom-align {
-    visibility: hidden;
-    display: none;
-  }
+/* Estilos para el botón */
+button {
+  padding: 8px 16px;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap; /* Evita que el texto del botón se parta en varias líneas */
+}
 
-  #ingresos {
-    
-    color: rgba(0,0,0,.87);
-    font-size: 1rem;
-    font-weight: 400;
-    letter-spacing: .009375em;
-    text-decoration: inherit;
-    text-transform: inherit;
-    align-self: flex-end;
-    box-sizing: border-box;
-    width: 100%;
-    padding: 20px 16px 6px;
-    transition: opacity 150ms cubic-bezier(0.4, 0, 0.2, 1);
-    border: none;
-    border-bottom: 1px solid black;
-    border-radius: 4px 4px 0 0;
-    background: rgb(245, 245, 245);
-    height: 56px;
-    :hover{
-        border-bottom-color: rgba(0,0,0,.87);
-        background: #ececec;
-    }
-  }
+/* Estilos para los resultados */
+.resultados {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 600px; /* Limita el ancho del bloque */
+  text-align: left; /* Alineación del texto a la izquierda */
+}

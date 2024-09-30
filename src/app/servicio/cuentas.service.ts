@@ -22,11 +22,21 @@ export class CuentasService {
 
   //Método para buscar un gasto en concreto
   findByName(descripcion: string): Observable<Gasto>{
-    return this.httpClient.get<Gasto>(`${this.backendURL}/buscar`)
+    return this.httpClient.get<Gasto>(`${this.backendURL}/buscar`);
   }
 
   //Método para añadir un nuevo gasto
-  añadirGasto(nuevoGasto: Gasto): Observable<any> {
-    return this.httpClient.post(`${this.backendURL}/añadir`, nuevoGasto)
+  añadirGasto(nuevoGasto: { descripcion: string; importe: number }): Observable<any> {
+    return this.httpClient.post<any>(`${this.backendURL}/add`, nuevoGasto);
+  }
+
+  //Método para modificar un gasto
+  modificarGasto(oldName: string, gastoModificado: Gasto): Observable<any> {
+    return this.httpClient.put<any>(`${this.backendURL}/modificar?nombre=${oldName}`, gastoModificado);
+  }  
+
+  //Método para eliminar un gasto
+  eliminarGasto(nombre: string): Observable<any>{
+    return this.httpClient.delete<any>(`${this.backendURL}/eliminar?nombre=${nombre}`);
   }
 }

@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+
 import { Component, OnInit } from '@angular/core';
 import { MatFormField, MatLabel } from '@angular/material/form-field';
 import {
@@ -8,33 +8,35 @@ import {
 } from '@angular/material/dialog';
 import { MatButtonModule } from '@angular/material/button';
 import { MatInputModule } from '@angular/material/input';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-dialog',
   standalone: true,
-  imports: [MatFormField, MatLabel, MatButtonModule, MatDialogModule, MatDialogContent, MatDialogTitle, MatInputModule],
+  imports: [MatFormField, MatLabel, MatButtonModule, MatDialogModule, MatDialogContent, MatDialogTitle, MatInputModule,FormsModule],
   templateUrl: './dialog.component.html',
   styleUrl: './dialog.component.css'
 })
 export class DialogComponent {
-  form!: FormGroup;
+  descripcion: string | undefined;
+  cantidad: number | undefined;
 
-  constructor(
-    public dialogRef: MatDialogRef<DialogComponent>,
-    public fb: FormBuilder
-  ) { }
+  constructor(public dialogRef: MatDialogRef<DialogComponent>) { }
 
-  //Método para añadir un nuevo gasto
-  añadirGasto() {
-    const url = 'http://localhost:4200'
+  //Método para añadir un nuevo gasto y cerrar el modal
+  addGasto() {
+    const nuevoGasto = {
+      descripcion: this.descripcion,
+      cantidad: this.cantidad
+    };
+
+    // Enviar los datos al componente padre y cerrar el modal
+    this.dialogRef.close(nuevoGasto);
   }
 
-  save() {
-    this.dialogRef.close(this.form.value);
-  }
-
+  // Método para cerrar el modal sin enviar datos
   close() {
     this.dialogRef.close();
+
   }
 }

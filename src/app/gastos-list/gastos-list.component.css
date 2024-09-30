@@ -5,14 +5,12 @@
   align-items: center;
 }
 
-.button {
+button {
   border-radius: 5px;              /* Bordes rectos */
   text-transform: none;    
   margin-bottom: 10px; 
 }
-.button:hover {
-  background-color: none;     /* Cambia el color al hacer hover */
-}
+
 .example-button-row {
   display: table-cell;
   max-width: 600px;

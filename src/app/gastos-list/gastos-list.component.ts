@@ -5,17 +5,18 @@ import { AppComponent } from "../app.component";
 import {MatTableModule} from '@angular/material/table';
 import { Gasto } from '../modelo/gasto';
 import { CuentasService } from '../servicio/cuentas.service';
-import { MatButton } from '@angular/material/button';
+import { MatButton, MatButtonModule } from '@angular/material/button';
 import {MatIcon} from '@angular/material/icon';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogComponent } from '../dialog/dialog.component';
+import { EditarDialogComponent } from '../editar-dialog/editar-dialog.component';
 
 
 
 @Component({
   selector: 'app-gastos-list',
   standalone: true,
-  imports: [NgFor, FormsModule, NgIf, AppComponent, MatTableModule, MatButton, MatIcon],
+  imports: [NgFor, FormsModule, NgIf, AppComponent, MatTableModule, MatButton, MatIcon, MatButtonModule],
   templateUrl: './gastos-list.component.html',
   styleUrl: './gastos-list.component.css'
 })
@@ -43,10 +44,44 @@ export class GastosListComponent implements OnInit{
   abrirDialog(): void{
       const dialogRef = this.dialog.open(DialogComponent);
 
-      dialogRef.afterClosed().subscribe(
-        data => console.log("Dialog output:", data)
+      dialogRef.afterClosed().subscribe( data => {
+          if (data) {
+          // Llamamos al servicio para añadir el nuevo ítem a la tabla
+          this.cuentasService.añadirGasto(data).subscribe(() => {
+            // Actualizar la lista de items después de añadir el nuevo item
+            this.ngOnInit();
+          });
+        }
+      }
     );  
   }
+
+  //Método para editar un gasto
+  editarGastoDialog(gasto: any){
+    const dialogRefEdit = this.dialog.open(EditarDialogComponent, {
+      panelClass: 'formDialog',
+      data: {...gasto}
+    });
+
+    dialogRefEdit.afterClosed().subscribe( data => {
+        this.cuentasService.modificarGasto(gasto.descripcion, data).subscribe(() => {
+
+          // Actualizar la lista de items después de añadir el nuevo item
+          this.ngOnInit();
+        })});
   
 }
+
+//Método para eliminar un gasto
+eliminarGasto(gastoEliminado: Gasto) {
+  this.cuentasService.eliminarGasto(gastoEliminado.descripcion).subscribe(() => {
+
+    // Actualizar la lista de items después de eliminar el gasto
+    this.ngOnInit();
+  });
+
+}
+
+}
+  
 
